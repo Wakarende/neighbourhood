@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'neighborhood_app',
+    'user',
     'rest_framework',   
 ]
 
