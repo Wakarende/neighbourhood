@@ -9,11 +9,12 @@ class NeighbourhoodClass(serializers.ModelSerializer):
 
   def create(self, validated_data):
     neighbour = Neighbourhood.objects.create(
-    neighbourhood_name=validated_data['neighbourhood_name'],
-    location=validated_data['location'],
-    count=validated_data['count'],
-    admin=validated_data['admin'],
+      neighbourhood_name=validated_data['neighbourhood_name'],
+      location=validated_data['location'],
+      count=validated_data['count'],
+      admin=validated_data['admin'],
     )
-    
+
     neighbour.save()
     return neighbour
+
