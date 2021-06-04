@@ -10,5 +10,6 @@ class Neighbourhood(models.Model):
 
   def __str__(self):
     return self.neighbourhood_name
-    
 
+
+  # def update_neighbourhood(self, id):
