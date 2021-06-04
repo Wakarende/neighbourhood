@@ -1,18 +1,15 @@
 from django.urls import path
-# from .views import NeighbourhoodView
+from .views import NeighbourhoodView
 from .models import Neighbourhood
 # from . import views
 
 urlpatterns = [
-  # path('', NeighbourhoodView.as_view(), name='neighbourhood'),
-  # path('<int:id>/', NeighbourhoodView.as_view(), name='delete_neighbourhood'),
+  path('', NeighbourhoodView.as_view()),
+  path('<int:pk>/', NeighbourhoodView.as_view()),
+  path('update/<int:pk>/', NeighbourhoodView.as_view()),
+  path('delete/<int:pk>/', NeighbourhoodView.as_view()),
 ]
 
-# urlpatterns = [
-# 	path('', views.apiOverview, name="api-overview"),
-# 	path('neighbourhood-list/', views.neigbourhoodList, name="neighbourhood-list"),
-# 	path('neighbourhood-detail/<str:pk>/', views.neighbourhoodDetail, name="neighbourhood-detail"),
-# 	path('neighbourhood-create/', views.neighbourhoodCreate, name="neighbourhood-create"),
-# ]
+
 
 

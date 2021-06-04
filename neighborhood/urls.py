@@ -18,7 +18,9 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/api/', include('user.urls')),
+    path('api/auth/', include('user.urls')),
     path('api/neighbourhood/', include('neighborhood_app.urls')),
-    # path('api/neighbourhood/<int:pk>', include('neighborhood_app.urls')),
+    
+    # rest framework 
+    path('api/business/', include('business.urls',)),
 ]

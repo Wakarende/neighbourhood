@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +42,14 @@ INSTALLED_APPS = [
     'user',
     'rest_framework',   
     'business',
+    'cloudinary',
 ]
+
+cloudinary.config(
+    cloud_name="joykirii",
+    api_key="856224545722866",
+    api_secret="zwRThSjWRshRNjfDbfHRCblm4HI",
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +88,7 @@ WSGI_APPLICATION = 'neighborhood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighborhood',
+        'NAME': 'hood',
         'USER': 'joykirii',
         'PASSWORD': 'kirii',
     }
