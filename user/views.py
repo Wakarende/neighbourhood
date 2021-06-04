@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import UserModel
 from django.contrib.auth.models import User
+from django.http import Http404
 
 # Create your views here.
 
@@ -47,6 +48,7 @@ class UserRegistrationView(APIView):
       return Response(serializers.data, status=status.HTTP_201_CREATED)
     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
   def put(self, request, pk, format=None, *args, **kwargs):
     user = self.get_user(pk)
     serializers = UserSerializerClass(user, request.data)
@@ -55,6 +57,7 @@ class UserRegistrationView(APIView):
       return Response(serializers.data)
     else:
       return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
   def delete(self, request, pk, format=None, *args, **kwargs):
     user = self.get_user(pk)

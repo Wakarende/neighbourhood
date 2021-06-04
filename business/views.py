@@ -45,7 +45,7 @@ class BusinessView(APIView):
 
   def put(self, request, pk, format=None, *args, **kwargs):
     business = self.get_business(pk)
-    serializers = BusinessClass(business, request.data)
+    serializers = BusinessSerializer(business, request.data)
     if serializers.is_valid():
       serializers.save()
       return Response(serializers.data)
