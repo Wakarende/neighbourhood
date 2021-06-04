@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'neighborhood_app',
     'user',
     'rest_framework',   
+    'business',
 ]
 
 MIDDLEWARE = [

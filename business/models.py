@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from neighbourhood_App.models import Neighbourhood
+from neighborhood_app.models import Neighbourhood
 
 # Create your models here.
 class BusinessModel(models.Model):
