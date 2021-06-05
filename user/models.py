@@ -6,7 +6,7 @@ from neighborhood_app.models import Neighbourhood
 # Create your models here.
 class Profile(models.Model):
   user=models.OneToOneField(User, on_delete = models.CASCADE)
-  image=CloudinaryField('Profile Picture')
+  # image=CloudinaryField('Profile Picture')
   bio =  models.TextField()
   email = models.EmailField()
   neighbourhood=models.ForeignKey(Neighbourhood,related_name='occupants_count', on_delete=models.CASCADE,null=True)

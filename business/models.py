@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from neighborhood_app.models import Neighbourhood
+from user.models import Profile
 
 # Create your models here.
 class BusinessModel(models.Model):
   business_name = models.CharField(max_length=100)
-  admin = models.ForeignKey(User, on_delete=models.CASCADE)
-  neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+  profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)
+  neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,)
   business_email = models.EmailField()
     
   

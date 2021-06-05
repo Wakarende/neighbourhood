@@ -22,10 +22,13 @@ class BusinessView(APIView):
     except self.model.DoesNotExist:
       raise Http404
 
-  def post(self, request, *args, **kwargs):
+  def post(self, request, format=None, *args, **kwargs,):
     serializer = self.serializer_class(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serialzier.errors, status=status.HTTP_404_BAD_REQUEST)
 
     business_data = serializer.data
 

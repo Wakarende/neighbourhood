@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from .models import Neighbourhood
 from django.http import response, JsonResponse
 from rest_framework.decorators import api_view
-# Create your views here.
 
+
+# Create your views here.
 class NeighbourhoodView(APIView):
   serializer_class = NeighbourhoodSerializer
   model = Neighbourhood
@@ -29,11 +30,6 @@ class NeighbourhoodView(APIView):
       serializers.save()
       return Response(serializers.data, status=status.HTTP_201_CREATED)
     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # def get(self, request, pk, format=None, *args, **kwargs):
-    #     neighbourhood = self.get_neighbourhood(pk)
-    #     serializers = NeighbourhoodSerializer(neighbourhood)
-    #     return Response(serializers.data)
 
   def put(self, request, pk, format=None, *args, **kwargs):
     neighbourhood = self.get_neighbourhood(pk)
