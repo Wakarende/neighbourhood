@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics, status
 from django.shortcuts import render,HttpResponse,Http404
 from rest_framework.decorators import api_view
-from user.models import UserModel
+# from user.models import UserModel
 
 
 # Create your views here.

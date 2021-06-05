@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from neighborhood_app.models import Neighbourhood
 
 # Create your models here.
-class UserModel(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
-  bio = models.TextField(null=True)
-  phone_number = models.CharField(max_length=10, null=True)
-  image=CloudinaryField('Profile Picture', default='')
-
+class Profile(models.Model):
+  user=models.OneToOneField(User, on_delete = models.CASCADE)
+  image=CloudinaryField('Profile Picture')
+  bio =  models.TextField()
+  email = models.EmailField()
+  neighbourhood=models.ForeignKey(Neighbourhood,related_name='occupants_count', on_delete=models.CASCADE,null=True)
 
   def __str__(self):
     return self.user.username
@@ -17,9 +18,10 @@ class UserModel(models.Model):
     self.save()
 
   def delete_profile(self):
-    self.delete()
+    self.delete() 
 
-  def edit_bio(self):
-    self.bio=new_bio
+  def edit_bio(self, new_bio):
+    self.bio = new_bio
     self.save()
+
 
