@@ -9,7 +9,7 @@ from rest_framework import filters
 from .serializer import PostSerializer
 
 # Create your views here.
-class PostList(APIView):
+class PostView(APIView):
   serializer_class=PostSerializer
   def get_post(self, pk):
     try:
@@ -59,3 +59,5 @@ class PostList(APIView):
     post = self.get_post(pk)
     post.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+  

@@ -10,9 +10,5 @@ urlpatterns = [
   path('delete/<int:pk>/', NeighbourhoodView.as_view()),
 ]
 
-# urlpatterns = [ 
-#   path('', views.neighbourhood_list),
-#   path('<int:pk>/', views.neighbourhood_detail),
-#   path('published/', views.neighbourhood_list_published)
-# ]
+
 
