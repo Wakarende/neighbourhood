@@ -19,7 +19,7 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # rest framework 
-    path('api/profile/', include('user.urls')),
+    path('api/', include('user.urls')),
     path('api/neighbourhood/', include('neighborhood_app.urls')),
     path('api/business/', include('business.urls',)),
 ]

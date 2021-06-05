@@ -95,4 +95,53 @@ class ProfileList(APIView):
     else:
       return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-  
+class UserList(APIView):
+  serializer_class=UserSerializer
+  def get_users(self,pk):
+    try:
+        return User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        raise Http404()
+
+  def get(self,request,format=None):
+    users=User.objects.all()
+    serializers=self.serializer_class(users, many=True)
+    return Response(serializers.data)
+
+  def post(self, request, format=None):
+    serializers=self.serializer_class(data=request.data)
+    if serializers.is_valid():
+      serializers.save()
+
+      users=serializers.data
+      response={
+        'data':{
+          'users':dict(users),
+          'status':'success',
+          'message':'user created successfully',
+        }
+      }
+      return Response(response, status=status.HTTP_200_OK)
+    return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+  def put(self,request,pk,format=None):
+    users=self.get_users(pk)
+    serializers=self.serializer_class(users,request.data)
+    if serializers.is_valid():
+      serializers.save()
+      users_list=serializers.data
+      response = {
+          'data': {
+              'users': dict(users_list),
+              'status': 'success',
+              'message': 'user updated successfully',
+          }
+      }
+      return Response(response, status=status.HTTP_200_OK)
+    else:
+      return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+  def delete(self,request,pk,format=None):
+    users=self.get_users(pk)
+    users.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
