@@ -7,7 +7,7 @@ class Neighbourhood(models.Model):
   neighbourhood_name = models.CharField(max_length=50)
   location = models.CharField(max_length=50)
   occupants = models.IntegerField(null=False, default=1)
-  admin = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+  description= models.TextField(default='')
 
   def __str__(self):
     return self.neighbourhood_name
