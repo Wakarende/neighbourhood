@@ -60,4 +60,15 @@ class BusinessView(APIView):
     business.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+class singleBusinessView(APIView):
+  serializer_class = BusinessSerializer
+  def get_business(self, pk):
+    try:
+      return BusinessModel.objects.get(pk=pk)
+    except BusinessModel.DoesNotExist:
+      return Http404()
 
+  def get(self, request, pk, format=None):
+    post = self.get_business(pk)
+    serializers = self.serializer_class(post)
+    return Response(serializers.data)
