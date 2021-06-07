@@ -11,16 +11,18 @@ from .serializer import PostSerializer
 # Create your views here.
 class PostView(APIView):
   serializer_class=PostSerializer
-  def get_post(self, pk):
+  def get_post( request, self, pk):
     try:
-        return Post.objects.get(pk=pk)
+      return Post.objects.get(pk=pk)
     except Post.DoesNotExist:
-        raise Http404()
+      raise Http404()
 
   def get(self, request, format=None,*args, **kwargs):
     post = Post.objects.all()
     serializers = self.serializer_class(post, many=True)
     return Response(serializers.data)
+
+  
 
   def post(self, request, format=None,*args, **kwargs):
     serializers = self.serializer_class(data=request.data)
@@ -60,4 +62,5 @@ class PostView(APIView):
     post.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+  
   

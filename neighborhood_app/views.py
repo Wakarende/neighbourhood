@@ -13,11 +13,11 @@ class NeighbourhoodView(APIView):
   serializer_class = NeighbourhoodSerializer
   model = Neighbourhood
 
-  def get_neighbourhood(self, pk):
+  def get_neighbourhood(self, pk,format=None):
     try:
-      return self.model.objects.get(pk=pk)
-    except self.model.DoesNotExist:
-      return Http404
+      return Neighbourhood.objects.get(pk=pk)
+    except Neighbourhood.DoesNotExist:
+      raise Http404
 
   def get(self, request, format=None, *args, **kwargs):
     all_neighbourhoods = Neighbourhood.objects.all()
@@ -31,7 +31,8 @@ class NeighbourhoodView(APIView):
       return Response(serializers.data, status=status.HTTP_201_CREATED)
     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-  def put(self, request, pk, format=None, *args, **kwargs):
+  def put(self, request, pk, format=None,*args, **kwargs):
+    pk = self.kwargs.get('pk')
     neighbourhood = self.get_neighbourhood(pk)
     serializers = NeighbourhoodSerializer(neighbourhood, request.data)
     if serializers.is_valid():
@@ -46,5 +47,16 @@ class NeighbourhoodView(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
   
+class singleNeighbourhoodView(APIView):
+  serializer_class = NeighbourhoodSerializer
+  def get_neighbourhood(self, pk):
+    try:
+      return Neighbourhood.objects.get(pk=pk)
+    except Neighbourhood.DoesNotExist:
+      return Http404()
 
+  def get(self, request, pk, format=None):
+    post = self.get_neighbourhood(pk)
+    serializers = self.serializer_class(post)
+    return Response(serializers.data)
 

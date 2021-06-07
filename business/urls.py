@@ -7,7 +7,7 @@ from .views import BusinessView
 
 urlpatterns = [
   path('', BusinessView.as_view()),
-  path('<int:pk>/', BusinessView.as_view()),
+  path('get/<int:pk>/', BusinessView.as_view()),
   path('update/<int:pk>/', BusinessView.as_view()),
   path('delete/<int:pk>/', BusinessView.as_view()),
 ]

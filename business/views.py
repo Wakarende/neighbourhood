@@ -23,14 +23,14 @@ class BusinessView(APIView):
       raise Http404
 
   def post(self, request, format=None, *args, **kwargs,):
-    serializer = self.serializer_class(data=request.data)
-    if serializer.is_valid():
-      serializer.save()
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    serializers = self.serializer_class(data=request.data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data, status=status.HTTP_200_OK)
 
-    return Response(serialzier.errors, status=status.HTTP_404_BAD_REQUEST)
+    return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    business_data = serializer.data
+    business_data = serializers.data
 
     response = {
       'data': {
@@ -40,7 +40,7 @@ class BusinessView(APIView):
       }
     }
 
-    return Response(response, status=status.HTTP_201_CREATED)
+    return Response(response, status=status.HTTP_200_OK)
 
   def get(self, request, *args, **kwargs):
     serializers = BusinessSerializer(self.all_business, many=True)
@@ -60,4 +60,4 @@ class BusinessView(APIView):
     business.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
-    
+
